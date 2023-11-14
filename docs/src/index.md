@@ -3,7 +3,7 @@
 This package allows to evaluate multiple integrals like
 
 ```math
-\int\_{-5}^4\int\_{-5}^{3-x}\int\_{-10}^{6-x-y} f(x, y, z)\,\text{d}z\,\text{d}y\,\text{d}x.
+\int_{-5}^4\int_{-5}^{3-x}\int_{-10}^{6-x-y} f(x, y, z)\,\text{d}z\,\text{d}y\,\text{d}x.
 ```
 
 In other words, the domain of integration is given by a set of linear 
