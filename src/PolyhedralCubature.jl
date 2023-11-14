@@ -1,7 +1,7 @@
 module PolyhedralCubature
 
 export integrateOnPolytope
-#export integratePolynomialOnPolytope
+export integratePolynomialOnPolytope
 
 import MiniQhull
 import Polyhedra
@@ -69,6 +69,25 @@ function integrateOnPolytope(
     info = false, 
     fkwargs...
   )
+end
+
+"""
+    integratePolynomialOnPolytope(poly, A, b)
+
+Exact integration of a polynomial over a convex polytope.
+
+# Arguments
+- `poly`: typed polynomial
+- `A`: matrix of the coefficients of the variables in the linear inequalities
+- `b`: vector made of the upper bounds of the linear inequalities
+"""
+function integratePolynomialOnPolytope(poly, A, b)
+  tetrahedra = _getTetrahedra(A, b)
+  integrals = [SimplicialCubature.integratePolynomialOnSimplex(poly, tetrahedra[1])]
+  for j in 2:ntetrahedra
+    push!(integrals, SimplicialCubature.integratePolynomialOnSimplex(poly, tetrahedra[j]))
+  end
+  return sum(integrals)
 end
 
 end # module PolyhedralCubature
