@@ -13,7 +13,7 @@ function _isPolytope(P)
   length(Polyhedra.rays(P)) == 0 && length(Polyhedra.lines(P)) == 0
 end
 
-function _getTetrahedra(A::Matrix{S}, b::Vector{T}) where S,T <: Real
+function _getTetrahedra(A::Matrix{S}, b::Vector{T}) where {S <: Real, T <: Real}
   H = Polyhedra.hrep(A, b)
   P = Polyhedra.polyhedron(H)
   if !_isPolytope(P)
@@ -23,8 +23,8 @@ function _getTetrahedra(A::Matrix{S}, b::Vector{T}) where S,T <: Real
   vertices = convert(Vector{Vector{Float64}}, rawVertices)
   indices = MiniQhull.delaunay(hcat(vertices...))
   _, ntetrahedra = size(indices)
-  T = promote_type(Rational{Int64}, eltype(eltype(rawVertices)))
-  tetrahedra = Vector{Vector{Vector{T}}}(undef, ntetrahedra)
+  TYPE = promote_type(Rational{Int64}, eltype(eltype(rawVertices)))
+  tetrahedra = Vector{Vector{Vector{TYPE}}}(undef, ntetrahedra)
   for j in 1:ntetrahedra
     ids = vec(indices[:, j])
     tetrahedra[j] = rawVertices[ids]
