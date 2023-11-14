@@ -45,7 +45,23 @@ A = [
 b = [5; 4; 5; 3; 10; 6]
 ```
 
-......
+Now assume for example that ``f(x,y,z) = x(x+1) - yz^2``. Once we have ``A`` 
+and ``b``, here is how to evaluate the integral of ``f`` over the convex polytope:
+
+```julia
+using PolyhedralCubature
+function f(x, y, z)
+  return x*(x+1) - y*z^2
+end
+function g(v)
+  return f(v[1], v[2], v[3])
+end
+I_f = integrateOnPolytope(g, A, b)
+I_f.integral
+# 57892.27499999998
+```
+
+....
 
 ___
 
