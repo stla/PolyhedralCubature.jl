@@ -83,7 +83,17 @@ integratePolynomialOnPolytope(poly, A, b)
 
 ## Method
 
-...... TODO
+The method runs as follows.
+
+- Firstly, the **Polyhedra** package is used to get the vertices of the convex 
+polytope.
+
+- Then, with the help of the **MiniQhull** package, the Delaunay tessellation 
+is applied to the vertices and one gets a partition of the convex polytope
+into simplices.
+
+- Finally, the **SimplicialCubature** package is used to evaluate the integrals
+on the simplicies.
 
 ___
 
