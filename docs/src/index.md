@@ -45,6 +45,9 @@ A = [
 b = [5; 4; 5; 3; 10; 6]
 ```
 
+
+## Integrating an arbitrary function
+
 Now assume for example that ``f(x,y,z) = x(x+1) - yz^2``. Once we have ``A`` 
 and ``b``, here is how to evaluate the integral of ``f`` over the convex polytope:
 
@@ -61,7 +64,26 @@ I_f.integral
 # 57892.27499999998
 ```
 
-....
+As we shall see, the exact value of this integral is ``57892.275``. 
+
+
+## Integrating a multivariate polynomial
+
+The `integratePolynomialOnPolytope` function provided by the package implements 
+a procedure to get the exact value of the integral in the case when the 
+integrand is polynomial, as in our current example.
+
+```julia
+using TypedPolynomials
+@polyvar x y z
+poly = x + y*z
+integratePolynomialOnPolytope(poly, A, b)
+# 2315691//40 (= 57892.275)
+```
+
+## Method
+
+...... TODO
 
 ___
 
