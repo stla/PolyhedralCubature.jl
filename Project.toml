@@ -1,0 +1,15 @@
+name = "PolyhedralCubature"
+uuid = "b83ae5ca-432e-4ddc-9034-449efe1fb776"
+authors = ["Stéphane Laurent <laurent_step@outlook.fr>"]
+version = "0.1.0"
+
+[deps]
+MiniQhull = "978d7f02-9e05-4691-894f-ae31a51d76ca"
+Polyhedra = "67491407-f73d-577b-9b50-8179a7c68029"
+SimplicialCubature = "552d7cc9-94b7-4d62-a95c-872e87830e46"
+
+[compat]
+MiniQhull = "0.4"
+Polyhedra = "0.7"
+SimplicialCubature = "0.2"
+julia = "1"
