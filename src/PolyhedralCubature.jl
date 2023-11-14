@@ -84,7 +84,7 @@ Exact integration of a polynomial over a convex polytope.
 function integratePolynomialOnPolytope(poly, A, b)
   tetrahedra = _getTetrahedra(A, b)
   integrals = [SimplicialCubature.integratePolynomialOnSimplex(poly, tetrahedra[1])]
-  for j in 2:ntetrahedra
+  for j in 2:length(tetrahedra)
     push!(integrals, SimplicialCubature.integratePolynomialOnSimplex(poly, tetrahedra[j]))
   end
   return sum(integrals)

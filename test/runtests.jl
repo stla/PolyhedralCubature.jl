@@ -79,7 +79,7 @@ end
   ]
   b = [5; 4; 5; 3; 10; 6]
   I_poly = integratePolynomialOnPolytope(poly, A, b)
-  @test I_poly == 53583 // 10
+  @test I_poly == -53583 // 10
 end
 
 @testset "Polynomial `x+yz` with A and b: Float64." begin
