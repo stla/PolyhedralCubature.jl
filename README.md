@@ -57,3 +57,41 @@ tolerance on the error;
 - `integratePolynomialOnPolytope`, to get the exact value of the integral of 
 a polynomial. 
 
+
+## Getting `A` and `b` (help wanted)
+
+It can be a bit annoying to write down the matrix `A` and the vector `b`. 
+In the [R version](https://github.com/stla/polyhedralCubature) 
+and in the [Python version](https://github.com/stla/PyPolyhedralCubature) 
+of this package, I have a way to get `A` and `b` from symbolic linear 
+inequalities. I have found such a way in Julia, but it has an inconvenient: 
+it returns `A` and `b` with the `Float64` element type, while it is better 
+to use, when possible, the `Int64` type or `Rational{Int64}` or 
+`Rational{BigInt}`. Here is an example of this Julia way:
+
+```julia
+using JuMP
+
+model = Model()
+@variable(model, x)
+@variable(model, y)
+@variable(model, z)
+
+@constraint(model, x >= -5)
+@constraint(model, x <= 4)
+@constraint(model, y >= -5)
+@constraint(model, x+y <= 3)
+@constraint(model, z >= -10)
+@constraint(model, 2*x+y+z <= 6)
+
+relax = relax_integrality(model)
+sfm = JuMP._standard_form_matrix(model)
+m, p = size(sfm.A)
+
+A = sfm.A[:, 1:(p-m)]
+```
+
+This gives `A`, and it is possible to get `b` from `sfm.lower` and `sfm.upper`.
+
+Please let me know if you have an idea for something similar which is not 
+limited to the `Float64` element type.
