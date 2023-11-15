@@ -48,4 +48,12 @@ A = [
 b = [5; 4; 5; 3; 10; 6]
 ```
 
-See the documentation for examples.
+See the documentation for examples. 
+The package provides two functions:
+
+- `integrateOnPolytope`, to integrate an arbitrary function with a desired 
+tolerance on the error;
+
+- `integratePolynomialOnPolytope`, to get the exact value of the integral of 
+a polynomial. 
+

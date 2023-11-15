@@ -86,7 +86,7 @@ integratePolynomialOnPolytope(poly, A, b)
 The method runs as follows.
 
 - Firstly, the **Polyhedra** package is used to get the vertices of the convex 
-polytope.
+polytope from the matrix ``A`` and the vector ``b``.
 
 - Then, with the help of the **MiniQhull** package, the Delaunay tessellation 
 is applied to the vertices and one gets a partition of the convex polytope
@@ -94,6 +94,13 @@ into simplices.
 
 - Finally, the **SimplicialCubature** package is used to evaluate the integrals
 on the simplicies.
+
+When the element type of `A` and `b` is `Int64`, then the vertex coordinates 
+obtained at the first step will have the `Rational{BigInt}` type. If possible, 
+always use the element type `Int64` or `Rational{Int64}` or `Rational{BigInt}` 
+for `A` and `b`. This allows to get an exact rational result from 
+`integratePolynomialOnPolytope` when the polynomial has integer or rational 
+coefficients.
 
 ___
 
